@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>武汉 GDP 走势图</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        #chart-container {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        // 准备数据
+        const years = ['2008年', '2009年', '2010年', '2011年', '2012年', '2013年', '2014年', '2015年', '2016年', '2017年', '2018年', '2019年', '2020年', '2021年', '2022年', '2023年', '2024年'];
+        const gdpData = [4064.62, 4741.69, 5458.35, 6586.52, 7752.52, 8747.64, 10025.93, 10547.67, 11531.42, 13090.81, 14847.29, 16223.21, 15616.06, 17716.76, 18866.43, 20011.65, 21106.23];
+
+        // 初始化 ECharts 实例
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        // 指定图表的配置项和数据
+        const option = {
+            title: {
+                text: '2008-2024年武汉GDP走势',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: '{b}: {c} 亿元'
+            },
+            xAxis: {
+                type: 'category',
+                data: years,
+                axisLabel: {
+                    rotate: 45 // 倾斜x轴标签，防止拥挤
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: 'GDP（亿元）',
+                axisLabel: {
+                    formatter: '{value} 亿元'
+                }
+            },
+            series: [{
+                name: 'GDP',
+                type: 'line',
+                data: gdpData,
+                smooth: true, // 平滑曲线
+                symbol: 'circle',
+                symbolSize: 8,
+                itemStyle: {
+                    color: '#5470c6'
+                },
+                lineStyle: {
+                    width: 3
+                }
+            }]
+        };
+
+        // 使用配置项显示图表
+        myChart.setOption(option);
+
+        // 响应窗口大小变化
+        window.addEventListener('resize', function() {
+            myChart.resize();
+        });
+    </script>
+</body>
+</html>
