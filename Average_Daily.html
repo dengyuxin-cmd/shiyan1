@@ -1,0 +1,109 @@
+<!--
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/en/editor.html?c=bar-simple
+-->
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://echarts.apache.org/en/js/vendors/echarts-gl/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://echarts.apache.org/en/js/vendors/echarts-stat/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-graph-modularity extension
+  <script type="text/javascript" src="https://echarts.apache.org/en/js/vendors/echarts-graph-modularity/dist/echarts-graph-modularity.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    //年日均客流
+		const yearflowChart = echarts.init(document.getElementById("container"), "light");
+		const yearflowChartOpt = {
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+					type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
+			},
+			xAxis: [
+				{
+					type: 'value'
+				}
+			],
+			yAxis: [
+				{
+					type: 'category',
+					axisTick: {
+						show: false
+					},
+					data: [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, ]
+				}
+			],
+			series: [
+				{
+					name: '年日均客流量',
+					type: 'bar',
+					label: {
+						show: true,
+						position: 'inside'
+					},
+					emphasis: {
+						focus: 'series'
+					},
+					data: [283.92, 334.94, 205.50, 274.54, 242.00, 367.63, 397.71, 399.16, ]
+				}
+			]
+		};
+		yearflowChart.setOption(yearflowChartOpt);	
+		
+		//浏览器窗口大小变化时，重置报表大小
+		$(window).resize(function() {
+			//rankChart.resize();
+			newflowChart.resize();
+			topflowChart.resize();
+			cityflowChart.resize();
+			yearflowChart.resize();
+		});
+	
+	//数字变化特效
+	function rollNum(elId, startVal, endVal, decimalNum) {
+		let n = decimalNum || 0;
+		let countUp = new CountUp(elId, startVal, endVal, n, 2.5, {
+			useEasing: true, 
+			useGrouping: true, 
+			separator: ',', 
+			decimal: '.'
+		});
+		if(!countUp.error) {
+			countUp.start();
+		}else {
+			console.error(countUp.error);
+		}
+	}
+  
+  </script>
+</body>
+</html>
